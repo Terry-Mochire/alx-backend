@@ -11,7 +11,8 @@ from flask_babel import Babel
 
 class Config(object):
     """
-    Configuration class
+    Configuration class for available languages
+    default locale and timezone
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
