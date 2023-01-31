@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def index() -> None:
+def index() -> str:
     """Returns the template '0-index.html'"""
     return render_template('0-index.html')
 
