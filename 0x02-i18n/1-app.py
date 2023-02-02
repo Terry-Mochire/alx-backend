@@ -1,18 +1,14 @@
 #!/usr/bin/env python3
 """
-Basic Babel setup
-hen instantiate the Babel object in your app.
-Store it in a module-level variable named babel.
+Flask app
 """
-
 from flask import Flask, render_template
 from flask_babel import Babel
 
 
 class Config(object):
     """
-    Configuration class for available languages
-    default locale and timezone
+    Configuration for Babel
     """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
@@ -20,14 +16,17 @@ class Config(object):
 
 
 app = Flask(__name__)
+app.config.from_object(Config)
 babel = Babel(app)
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def index() -> str:
-    """Returns the template '1-index.html'"""
+    """
+    Handles / route
+    """
     return render_template('1-index.html')
 
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+if __name__ == "__main__":
+    app.run(port="5000", host="0.0.0.0", debug=True)
