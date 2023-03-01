@@ -1,4 +1,4 @@
-import { createClient } from "redis";
+import { createClient, print } from "redis";
 
 const client = createClient();
 
@@ -12,12 +12,9 @@ client.on("error", (err) => {
 
 
 function setNewSchool(schoolName, value) {
-    client.set(schoolName, value, (err, reply) => {
-        console.log(`Reply: ${redis.print(reply)}`);
-    });
-
+    client.set(schoolName, value, print);
 }
-    
+
 function displaySchoolValue(schoolName) {
     client.get(schoolName, (err, reply) => {
         console.log(reply);
