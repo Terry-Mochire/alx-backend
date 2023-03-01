@@ -1,4 +1,5 @@
-import { createClient } from "redis";
+import { createClient, print } from "redis";
+import { promisify } from "util";
 
 const client = createClient();
 
@@ -12,16 +13,14 @@ client.on("error", (err) => {
 
 
 function setNewSchool(schoolName, value) {
-    client.set(schoolName, value, (err, reply) => {
-        console.log(reply);
-    });
-
+    client.set(schoolName, value, print);
 }
-    
+
+const getAsync = promisify(client.get).bind(client);
+
 async function displaySchoolValue(schoolName) {
-    client.get(schoolName, (err, reply) => {
-        console.log(reply);
-    });
+    const reply = await getAsync(schoolName);
+    console.log(reply);
 }
 
 displaySchoolValue('Holberton');
